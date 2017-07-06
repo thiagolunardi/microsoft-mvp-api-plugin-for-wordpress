@@ -5,7 +5,22 @@
   * Description: Automaticly add your post as a contribution in your MVP Profile.
   * Version: 1.0
   * Author: Thiago Lunardi
-  * License: GPL2
+  * Author URI: http://thiagolunardi.net
+  * License: GPL3
+  * License URI: https://www.gnu.org/licenses/gpl-3.0.html
+
+  * {Plugin Name} is free software: you can redistribute it and/or modify
+  * it under the terms of the GNU General Public License as published by
+  * the Free Software Foundation, either version 2 of the License, or
+  * any later version.
+  
+  * {Plugin Name} is distributed in the hope that it will be useful,
+  * but WITHOUT ANY WARRANTY; without even the implied warranty of
+  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+  * GNU General Public License for more details.
+  
+  * You should have received a copy of the GNU General Public License
+  * along with {Plugin Name}. If not, see {License URI}.
 **/
 
 $msmvpapi_baseUrl = "https://mvpapi.azure-api.net/mvp/api";
@@ -14,19 +29,19 @@ $msmvpapi_baseUrl = "https://mvpapi.azure-api.net/mvp/api";
  * Deletes a Contribution item
  * @return void
  */
-function msmvpapi_deleteContribution ( $id )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions?id=" + $id, $args ) );
-  return $areas;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_deleteContribution ( $id ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions?id=" + $id, $args ) );
+    return $areas;
+  }
 }
-
 /**
  * Deletes a OnlineIdentity item
  * @return void
  */
-function msmvpapi_deleteOnlineIdentity ( $id )
-{
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+function msmvpapi_deleteOnlineIdentity ( $id ) {
   $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
   $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
   return $areas;
@@ -36,11 +51,12 @@ function msmvpapi_deleteOnlineIdentity ( $id )
  * Gets a list of Contribution areas grouped by Award Names
  * @return array ContributionArea item
  */
-function msmvpapi_getContributionAreas ( )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributionsareas", $args ) );
-  return $areas;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getContributionAreas ( )  {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributionsareas", $args ) );
+    return $areas;
+  }
 }
 
 /**
@@ -48,11 +64,12 @@ function msmvpapi_getContributionAreas ( )
  * @param int $id ContributionId
  * @return object Contribution item
  */
-function msmvpapi_getContributionById ( int $id )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $contrib = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions?id=" + $id, $args ) );
-  return $contrib;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getContributionById ( int $id ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $contrib = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions?id=" + $id, $args ) );
+    return $contrib;
+  }
 }
 
 /**
@@ -61,33 +78,36 @@ function msmvpapi_getContributionById ( int $id )
  * @param int $limit Page take integer
  * @return array Contribution item
  */
-function msmvpapi_getContributions ( int $offset = 0, int $limit = 0 )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $contribs = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions/" + $offset +"/"+ $limit, $args ) );
-  return $contribs;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getContributions ( int $offset = 0, int $limit = 0 ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $contribs = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions/" + $offset +"/"+ $limit, $args ) );
+    return $contribs;
+  }
 }
 
 /**
  * Gets a list of Contribution Types
  * @return array ContributionType item
  */
-function msmvpapi_getContributionTypes ( )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $types = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributionstypes", $args ) );
-  return $types;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getContributionTypes ( ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $types = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributionstypes", $args ) );
+    return $types;
+  }
 }
 
 /**
  * Gets the current logged on user profile summary
  * @return object Profile item
  */
-function msmvpapi_getMvpProfile ( )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $profile = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/profile", $args ) );
-  return $profile;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getMvpProfile ( ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $profile = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/profile", $args ) );
+    return $profile;
+  }
 }
 
 /**
@@ -95,6 +115,7 @@ function msmvpapi_getMvpProfile ( )
  * @param string $mvpid Users mvpid
  * @return object Profile item
  */
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
 function msmvpapi_getMvpProfileById ( string $mvpid )
 {
   $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
@@ -106,23 +127,25 @@ function msmvpapi_getMvpProfileById ( string $mvpid )
  * Get current user online identities. Retricted to the current user
  * @return array OnlineIdentity item
  */
-function msmvpapi_getOnlineIdentities ( )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
-  return $onlineIdentities;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getOnlineIdentities ( ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
+    return $onlineIdentities;
+  }
 }
-
 /**
  * Get current user online identities. Retricted to the current user
  * @param string $nominationsId Guid nominationsId
  * @return array OnlineIdentity item
  */
-function msmvpapi_getOnlineIdentitiesByNominationId ( string $nominationsId )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities/" + $nominationsId, $args ) );
-  return $onlineIdentities;
+if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getOnlineIdentitiesByNominationId ( string $nominationsId )
+  {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities/" + $nominationsId, $args ) );
+    return $onlineIdentities;
+  }
 }
 
 /**
@@ -130,22 +153,24 @@ function msmvpapi_getOnlineIdentitiesByNominationId ( string $nominationsId )
  * @param int $id Online identity id
  * @return object OnlineIdentity item
  */
-function msmvpapi_getOnlineIdentitiesByNominationId ( string $id )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities/" + $id, $args ) );
-  return $onlineIdentities;
+if ( !function_exists ( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getOnlineIdentitiesByNominationId ( string $id ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities/" + $id, $args ) );
+    return $onlineIdentities;
+  }
 }
 
 /**
  * Gets a list of Sharing Preference / Visibility Types for Contributions
  * @return array SharingPreference item
  */
-function msmvpapi_getSharingPreferences ( )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-  $sharingPreferences = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/sharingpreferences", $args ) );
-  return $sharingPreferences;
+if ( !function_exists ( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_getSharingPreferences ( ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
+    $sharingPreferences = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/sharingpreferences", $args ) );
+    return $sharingPreferences;
+  }
 }
 
 /**
@@ -153,11 +178,12 @@ function msmvpapi_getSharingPreferences ( )
  * @param object Contribution item
  * @return object Newly created Contribution item
  */
-function msmvpapi_postContribution ( $contrib )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $contrib );
-  $contrib = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl + "/contributions", $args ) );
-  return $contrib;
+if ( !function_exists ( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_postContribution ( $contrib ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $contrib );
+    $contrib = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl + "/contributions", $args ) );
+    return $contrib;
+  }
 }
 
 /**
@@ -165,11 +191,12 @@ function msmvpapi_postContribution ( $contrib )
  * @param object $onlineIdentity
  * @return object Newly created OnlineIdentity item
  */
-function msmvpapi_postOnlineIdentity ( $onlineIdentity )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $onlineIdentity );
-  $onlineIdentity = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
-  return $onlineIdentity;
+if ( !function_exists ( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_postOnlineIdentity ( $onlineIdentity ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $onlineIdentity );
+    $onlineIdentity = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
+    return $onlineIdentity;
+  }
 }
 
 /**
@@ -177,11 +204,12 @@ function msmvpapi_postOnlineIdentity ( $onlineIdentity )
  * @param object $contrib Contribution item
  * @return object Updated Contribution item
  */
-function msmvpapi_putContribution ( $contrib )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $contrib );
-  $contrib = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl + "/contributions", $args ) );
-  return $contrib;
+if ( !function_exists ( 'msmvpapi_deleteContribution' ) ) {
+  function msmvpapi_putContribution ( $contrib ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $contrib );
+    $contrib = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl + "/contributions", $args ) );
+    return $contrib;
+  }
 }
 
 /**
@@ -189,23 +217,24 @@ function msmvpapi_putContribution ( $contrib )
  * @param object $onlineIdentity
  * @return object Updated OnlineIdentity item
  */
-function msmvpapi_putOnlineIdentity ( $onlineIdentity )
-{
-  $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $onlineIdentity );
-  $onlineIdentity = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
-  return $onlineIdentity;
+if ( !function_exists ( 'msmvpapi_putOnlineIdentity' ) ) {
+  function msmvpapi_putOnlineIdentity ( $onlineIdentity ) {
+    $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $onlineIdentity );
+    $onlineIdentity = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
+    return $onlineIdentity;
+  }
 }
 
 /**
  * Create HTTP request Header with credenttials
  * @return object HTTPHeader
  */
-function msmvpapi_httpHeaders ( )
-{
-  $headers = array (
-    'Ocp-Apim-Subscription-Key' => '{subscription key}',
-    'Authorization' => '{access token}' );
-  return $headers;
+if ( !function_exists ( 'msmvpapi_httpHeaders' ) ) {
+  function msmvpapi_httpHeaders ( ) {
+    $headers = array (
+      'Ocp-Apim-Subscription-Key' => '{subscription key}',
+      'Authorization' => '{access token}' );
+    return $headers;
+  }
 }
-
 ?>
