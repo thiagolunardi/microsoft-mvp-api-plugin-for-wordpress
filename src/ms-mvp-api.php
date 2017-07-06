@@ -28,9 +28,9 @@ include_once( 'settings.php' );
 $msmvpapi_baseUrl = "https://mvpapi.azure-api.net/mvp/api";
 
 $msmvpapi_scope = "wl.emails%20wl.basic%20wl.offline_access%20wl.signin";
-$msmvpapi_subscriptionKey = "0d2334b142774020b3c3208d606e18d9";
-$msmvpapi_client_id = "00000000441D911F";
-$msmvpapi_client_secret = "aVe0pY8pO0Lya45aBOgfc5p";
+$msmvpapi_subscriptionKey = get_option( 'msmvpapi_api_key' );
+$msmvpapi_client_id = get_option( 'msmvpapi_client_id' );
+$msmvpapi_client_secret = get_option( 'msmvpapi_client_secret' );
 $msmvpapi_signInUrl = "https://login.live.com/oauth20_authorize.srf?client_id=" . $msmvpapi_client_id . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope=" . $msmvpapi_scope;
 
 $msmvpapi_accessTokenUrl = "https://login.live.com/oauth20_token.srf?client_id=" . $msmvpapi_client_id . "&client_secret=" . $msmvpapi_client_secret . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=authorization_code&code=";
