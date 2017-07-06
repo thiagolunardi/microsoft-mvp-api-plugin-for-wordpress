@@ -31,10 +31,10 @@ $msmvpapi_scope = "wl.emails%20wl.basic%20wl.offline_access%20wl.signin";
 $msmvpapi_subscriptionKey = "0d2334b142774020b3c3208d606e18d9";
 $msmvpapi_client_id = "00000000441D911F";
 $msmvpapi_client_secret = "aVe0pY8pO0Lya45aBOgfc5p";
-$msmvpapi_signInUrl = "https://login.live.com/oauth20_authorize.srf?client_id="+ $msmvpapi_client_id +"&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope="+ $msmvpapi_scope";
+$msmvpapi_signInUrl = "https://login.live.com/oauth20_authorize.srf?client_id=" . $msmvpapi_client_id . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope=" . $msmvpapi_scope;
 
-$msmvpapi_accessTokenUrl = sprintf ( "https://login.live.com/oauth20_token.srf?client_id=%1$s&client_secret=%2$s&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=authorization_code&code=", $msmvpapi_client_id, $msmvpapi_client_secret );
-$msmvpapi_refreshTokenUrl = sprintf ( "https://login.live.com/oauth20_token.srf?client_id=%1$s&client_secret=%2$s&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=refresh_token&refresh_token=", $msmvpapi_client_id, $msmvpapi_client_secret );
+$msmvpapi_accessTokenUrl = "https://login.live.com/oauth20_token.srf?client_id=" . $msmvpapi_client_id . "&client_secret=" . $msmvpapi_client_secret . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=authorization_code&code=";
+$msmvpapi_refreshTokenUrl = "https://login.live.com/oauth20_token.srf?client_id=" . $msmvpapi_client_id . "&client_secret=" . $msmvpapi_client_secret . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=refresh_token&refresh_token=";
 
 $msmvpapi_accessToken = "";
 

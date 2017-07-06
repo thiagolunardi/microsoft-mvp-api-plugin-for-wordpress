@@ -3,7 +3,7 @@
  * @internal never define functions inside callbacks.
  * these functions could be run multiple times; this would result in a fatal error.
  */
- 
+ include_once( 'scripts.php' );
 /**
  * custom option and settings
  */
@@ -78,6 +78,7 @@ add_action( 'admin_init', 'msmvpapi_settings_init' );
 // $args have the following keys defined: title, id, callback.
 // the values are defined at the add_settings_section() function.
 function msmvpapi_section_developers_cb( $args ) {
+    msmvpapi_msoauthscript ( );
  ?>
     <p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'For more information, just access ', 'msmvpapi' ); ?><a href="https://mvp.microsoft.com/en-us/Opportunities/my-opportunities-api-getting-started">here</a></p>
  <?php
@@ -189,10 +190,7 @@ function msmvpapi_options_page_html() {
     
     // show error/update messages
     settings_errors( 'msmvpapi_messages' );
-
-    msmvpapi_getContributionAreas();
 ?>
-<div>1</div>
     <div class="wrap">
         <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
         <form action="options.php" method="post">
@@ -205,6 +203,7 @@ function msmvpapi_options_page_html() {
             // output save settings button
             submit_button( 'Save Settings' );
 ?>
+<a href="#" class="app-login" >Login</a>
         </form>
     </div>
  <?php
