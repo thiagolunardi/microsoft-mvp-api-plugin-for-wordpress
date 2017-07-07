@@ -35,7 +35,7 @@ $msmvpapi_options = get_option( "msmvpapi_options" );
 if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
   function msmvpapi_deleteContribution ( $id ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions?id=" + $id, $args ) );
+    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/contributions?id=" . $id, $args ) );
     return $areas;
   }
 }
@@ -46,7 +46,7 @@ if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
 if ( !function_exists( 'msmvpapi_deleteOnlineIdentity' ) ) {
   function msmvpapi_deleteOnlineIdentity ( $id ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
+    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/onlineidentities", $args ) );
     return $areas;
   }
 }
@@ -73,7 +73,7 @@ if ( !function_exists( 'msmvpapi_getContributionAreas' ) ) {
 if ( !function_exists( 'msmvpapi_getContributionById' ) ) {
   function msmvpapi_getContributionById ( int $id ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $contrib = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions?id=" + $id, $args ) );
+    $contrib = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/contributions?id=" . $id, $args ) );
     return $contrib;
   }
 }
@@ -87,7 +87,7 @@ if ( !function_exists( 'msmvpapi_getContributionById' ) ) {
 if ( !function_exists( 'msmvpapi_getContributions' ) ) {
   function msmvpapi_getContributions ( int $offset = 0, int $limit = 0 ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $contribs = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributions/" + $offset +"/"+ $limit, $args ) );
+    $contribs = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/contributions/" . $offset +"/"+ $limit, $args ) );
     return $contribs;
   }
 }
@@ -99,7 +99,7 @@ if ( !function_exists( 'msmvpapi_getContributions' ) ) {
 if ( !function_exists( 'msmvpapi_getContributionTypes' ) ) {
   function msmvpapi_getContributionTypes ( ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $types = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributionstypes", $args ) );
+    $types = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/contributionstypes", $args ) );
     return $types;
   }
 }
@@ -111,7 +111,7 @@ if ( !function_exists( 'msmvpapi_getContributionTypes' ) ) {
 if ( !function_exists( 'msmvpapi_getMvpProfile' ) ) {
   function msmvpapi_getMvpProfile ( ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $profile = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/profile", $args ) );
+    $profile = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/profile", $args ) );
     return $profile;
   }
 }
@@ -125,7 +125,7 @@ if ( !function_exists( 'msmvpapi_getMvpProfileById' ) ) {
   function msmvpapi_getMvpProfileById ( string $mvpid )
   {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $profile = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/profile/" + $mvpid, $args ) );
+    $profile = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/profile/" . $mvpid, $args ) );
     return $profile;
   }
 }
@@ -137,7 +137,7 @@ if ( !function_exists( 'msmvpapi_getMvpProfileById' ) ) {
 if ( !function_exists( 'msmvpapi_getOnlineIdentities' ) ) {
   function msmvpapi_getOnlineIdentities ( ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
+    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/onlineidentities", $args ) );
     return $onlineIdentities;
   }
 }
@@ -150,7 +150,7 @@ if ( !function_exists( 'msmvpapi_getOnlineIdentitiesByNominationId' ) ) {
   function msmvpapi_getOnlineIdentitiesByNominationId ( string $nominationsId )
   {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities/" + $nominationsId, $args ) );
+    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/onlineidentities/" . $nominationsId, $args ) );
     return $onlineIdentities;
   }
 }
@@ -163,7 +163,7 @@ if ( !function_exists( 'msmvpapi_getOnlineIdentitiesByNominationId' ) ) {
 if ( !function_exists ( 'msmvpapi_getOnlineIdentitiesByNominationId' ) ) {
   function msmvpapi_getOnlineIdentitiesByNominationId ( string $id ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/onlineidentities/" + $id, $args ) );
+    $onlineIdentities = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/onlineidentities/" . $id, $args ) );
     return $onlineIdentities;
   }
 }
@@ -175,7 +175,7 @@ if ( !function_exists ( 'msmvpapi_getOnlineIdentitiesByNominationId' ) ) {
 if ( !function_exists ( 'msmvpapi_getSharingPreferences' ) ) {
   function msmvpapi_getSharingPreferences ( ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $sharingPreferences = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/sharingpreferences", $args ) );
+    $sharingPreferences = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/sharingpreferences", $args ) );
     return $sharingPreferences;
   }
 }
@@ -188,7 +188,7 @@ if ( !function_exists ( 'msmvpapi_getSharingPreferences' ) ) {
 if ( !function_exists ( 'msmvpapi_postContribution' ) ) {
   function msmvpapi_postContribution ( $contrib ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $contrib );
-    $contrib = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl + "/contributions", $args ) );
+    $contrib = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl . "/contributions", $args ) );
     return $contrib;
   }
 }
@@ -201,7 +201,7 @@ if ( !function_exists ( 'msmvpapi_postContribution' ) ) {
 if ( !function_exists ( 'msmvpapi_postOnlineIdentity' ) ) {
   function msmvpapi_postOnlineIdentity ( $onlineIdentity ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $onlineIdentity );
-    $onlineIdentity = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
+    $onlineIdentity = wp_remote_retrieve_body ( wp_remote_post( $msmvpapi_baseUrl . "/onlineidentities", $args ) );
     return $onlineIdentity;
   }
 }
@@ -214,7 +214,7 @@ if ( !function_exists ( 'msmvpapi_postOnlineIdentity' ) ) {
 if ( !function_exists ( 'msmvpapi_putContribution' ) ) {
   function msmvpapi_putContribution ( $contrib ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $contrib );
-    $contrib = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl + "/contributions", $args ) );
+    $contrib = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl . "/contributions", $args ) );
     return $contrib;
   }
 }
@@ -227,7 +227,7 @@ if ( !function_exists ( 'msmvpapi_putContribution' ) ) {
 if ( !function_exists ( 'msmvpapi_putOnlineIdentity' ) ) {
   function msmvpapi_putOnlineIdentity ( $onlineIdentity ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ), 'body' =>  $onlineIdentity );
-    $onlineIdentity = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl + "/onlineidentities", $args ) );
+    $onlineIdentity = wp_remote_retrieve_body ( wp_remote_put( $msmvpapi_baseUrl . "/onlineidentities", $args ) );
     return $onlineIdentity;
   }
 }
