@@ -24,6 +24,7 @@
 **/
 
 include_once( 'settings.php' );
+include_once( 'hooks.php' );
 
 $msmvpapi_baseUrl = "https://mvpapi.azure-api.net/mvp/api";
 $msmvpapi_options = get_option( "msmvpapi_options" );
@@ -35,8 +36,8 @@ $msmvpapi_options = get_option( "msmvpapi_options" );
 if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
   function msmvpapi_deleteContribution ( $id ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/contributions?id=" . $id, $args ) );
-    return $areas;
+    $contrib = wp_remote_retrieve_body ( wp_remote_delete( $msmvpapi_baseUrl . "/contributions?id=" . $id, $args ) );
+    return $contrib;
   }
 }
 /**
@@ -46,8 +47,8 @@ if ( !function_exists( 'msmvpapi_deleteContribution' ) ) {
 if ( !function_exists( 'msmvpapi_deleteOnlineIdentity' ) ) {
   function msmvpapi_deleteOnlineIdentity ( $id ) {
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl . "/onlineidentities", $args ) );
-    return $areas;
+    $onlineIdenity = wp_remote_retrieve_body ( wp_remote_delete( $msmvpapi_baseUrl . "/onlineidentities?id=" . $id, $args ) );
+    return $onlineIdenity;
   }
 }
 
