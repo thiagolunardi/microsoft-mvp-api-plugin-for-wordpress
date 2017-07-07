@@ -57,17 +57,11 @@ if ( !function_exists( 'msmvpapi_deleteOnlineIdentity' ) ) {
  */
 if ( !function_exists( 'msmvpapi_getContributionAreas' ) ) {
   function msmvpapi_getContributionAreas ( )  {                      
-    echo "msmvpapi_getContributionAreas(6)<br />";
     global $msmvpapi_baseUrl;
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    echo "HTTP-Headers:<br />";
-    print_r ( $args );
-    $response = wp_remote_get( $msmvpapi_baseUrl . "/contributions/contributionsareas", $args );
-    echo "URL: " . $msmvpapi_baseUrl . "/contributions/contributionsareas<br />";
-    echo "RESPONSE:<br />";
-    print_r ( $response );
-    //$areas = wp_remote_retrieve_body ( $response );
-    //return $areas;
+    $response = wp_remote_get( $msmvpapi_baseUrl . "/contributions/contributionareas", $args );
+    $areas = wp_remote_retrieve_body ( $response );
+    return $areas;
   }       
 }
 
@@ -249,8 +243,9 @@ if ( !function_exists ( 'msmvpapi_httpHeaders' ) ) {
     $api_key = $msmvpapi_options [ "api_key" ];
 
     $headers = array (
+      'httpversion' => '1.1',
       'Ocp-Apim-Subscription-Key' => $api_key,
-      'Authorization' => $token );
+      'Authorization' => 'Bearer ' . $token );
 
     return $headers;
   }

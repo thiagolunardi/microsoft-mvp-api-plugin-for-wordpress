@@ -18,6 +18,28 @@ function login () {
         console.log('Error', error);
     });
 }
+function renewToken () {
+    var user = userAgentApplication.getUser();
+    console.log('Renewing token...');
+    userAgentApplication.acquireTokenSilent(['user.read'], null, user).then( function(token) {
+        console.log('New token', token);
+        document.getElementById('msmvpapi_token').value = token;
+        document.getElementById('submit').click();
+    }, function (error) {
+        console.log('Error', error);
+    });
+}
+
+function logout () {
+    var user = userAgentApplication.getUser();
+    console.log('Renewing token...');
+    userAgentApplication.logout().then(function () {
+        document.getElementById('msmvpapi_token').value = '';
+        document.getElementById('submit').click();
+    }, function(error){
+        console.log('Error', error);
+    });
+}
 </script>
 <?php    
 }

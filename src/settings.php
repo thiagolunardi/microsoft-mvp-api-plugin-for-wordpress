@@ -178,10 +178,9 @@ function msmvpapi_field_token_cb( $args ) {
     // output the field
 ?>
     <input type="text"
-           readonly="readonly"
            id="msmvpapi_token"
            name="msmvpapi_options[token]"
-           value="<?= isset($token) ? esc_attr($token) : ''; ?>" />
+           value="<?= isset($token) ? esc_attr($token) : ''; ?>" /> <a href="#" onclick="javascript:renewToken();">Refresh</a>
     <p class="description">
         <?php esc_html_e( 'Authenticatoin token ', 'msmvpapi' ); ?>
     </p>
@@ -241,7 +240,7 @@ function msmvpapi_options_page_html() {
             // output save settings button
             submit_button( 'Save Settings' );
 ?>
-            <a href="#" onclick="javascript:login()">Login</a>
+            <a href="#" onclick="javascript:login()">Login</a> | <a href="#" onclick="javascript:logout()">Logout</a>
         </form>
     </div>
  <?php
