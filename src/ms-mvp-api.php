@@ -26,17 +26,7 @@
 include_once( 'settings.php' );
 
 $msmvpapi_baseUrl = "https://mvpapi.azure-api.net/mvp/api";
-
-$msmvpapi_scope = "wl.emails%20wl.basic%20wl.offline_access%20wl.signin";
-$msmvpapi_subscriptionKey = get_option( 'msmvpapi_api_key' );
-$msmvpapi_client_id = get_option( 'msmvpapi_client_id' );
-$msmvpapi_client_secret = get_option( 'msmvpapi_client_secret' );
-$msmvpapi_signInUrl = "https://login.live.com/oauth20_authorize.srf?client_id=" . $msmvpapi_client_id . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&response_type=code&scope=" . $msmvpapi_scope;
-
-$msmvpapi_accessTokenUrl = "https://login.live.com/oauth20_token.srf?client_id=" . $msmvpapi_client_id . "&client_secret=" . $msmvpapi_client_secret . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=authorization_code&code=";
-$msmvpapi_refreshTokenUrl = "https://login.live.com/oauth20_token.srf?client_id=" . $msmvpapi_client_id . "&client_secret=" . $msmvpapi_client_secret . "&redirect_uri=https://login.live.com/oauth20_desktop.srf&grant_type=refresh_token&refresh_token=";
-
-$msmvpapi_accessToken = "";
+$msmvpapi_options = get_option( "msmvpapi_options" );
 
 /**
  * Deletes a Contribution item
@@ -66,12 +56,19 @@ if ( !function_exists( 'msmvpapi_deleteOnlineIdentity' ) ) {
  * @return array ContributionArea item
  */
 if ( !function_exists( 'msmvpapi_getContributionAreas' ) ) {
-  function msmvpapi_getContributionAreas ( )  {
+  function msmvpapi_getContributionAreas ( )  {                      
+    echo "msmvpapi_getContributionAreas(6)<br />";
     global $msmvpapi_baseUrl;
     $args = array ( 'headers' => msmvpapi_httpHeaders ( ) );
-    $areas = wp_remote_retrieve_body ( wp_remote_get( $msmvpapi_baseUrl + "/contributionsareas", $args ) );
-    return $areas;
-  }
+    echo "HTTP-Headers:<br />";
+    print_r ( $args );
+    $response = wp_remote_get( $msmvpapi_baseUrl . "/contributions/contributionsareas", $args );
+    echo "URL: " . $msmvpapi_baseUrl . "/contributions/contributionsareas<br />";
+    echo "RESPONSE:<br />";
+    print_r ( $response );
+    //$areas = wp_remote_retrieve_body ( $response );
+    //return $areas;
+  }       
 }
 
 /**
@@ -241,35 +238,20 @@ if ( !function_exists ( 'msmvpapi_putOnlineIdentity' ) ) {
   }
 }
 
-
-if ( !function_exists( 'msmvpapi_makeAccessTokenRequest' ) ) {
-  function msmvpapi_makeAccessTokenRequest ( $requestUrl ) {
-    echo $requestUrl;
-    $tokenData =  wp_remote_retrieve_body ( wp_remote_get( $requestUrl ) );
-    //$tokenData = json_decode ( wp_remote_retrieve_body ( wp_remote_get( $requestUrl ) ) );
-    echo $tokenData;
-    //if ( strpos ( $tokenData , "access_token" ) ) {
-        //Properties.Settings.Default["access_token"] = tokenData["access_token"];
-        //Properties.Settings.Default["refresh_token"] = tokenData["refresh_token"];
-        //Properties.Settings.Default.Save();
-    //}
-    //testApiAccess();
-  }
-}
-
 /**
  * Create HTTP request Header with credenttials
  * @return object HTTPHeader
  */
 if ( !function_exists ( 'msmvpapi_httpHeaders' ) ) {
   function msmvpapi_httpHeaders ( ) {
-    global $msmvpapi_accessToken, $msmvpapi_accessTokenUrl, $msmvpapi_subscriptionKey, $msmvpapi_signInUrl;
-    if ( $msmvpapi_accessToken == "" ) {
-      $msmvpapi_accessToken = msmvpapi_makeAccessTokenRequest ( $msmvpapi_signInUrl );
-    }
+    global $msmvpapi_options;
+    $token = $msmvpapi_options [ "token" ];
+    $api_key = $msmvpapi_options [ "api_key" ];
+
     $headers = array (
-      'Ocp-Apim-Subscription-Key' => $msmvpapi_subscriptionKey,
-      'Authorization' => $msmvpapi_accessToken );
+      'Ocp-Apim-Subscription-Key' => $api_key,
+      'Authorization' => $token );
+
     return $headers;
   }
 }

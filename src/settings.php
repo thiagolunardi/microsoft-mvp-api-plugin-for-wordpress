@@ -10,9 +10,10 @@
 function msmvpapi_settings_init ( ) {
 
     // register a new setting for "msmvpapi" page
-    register_setting( 'msmvpapi', 'msmvpapi_api_key' );
-    register_setting( 'msmvpapi', 'msmvpapi_client_id' );
-    register_setting( 'msmvpapi', 'msmvpapi_client_secret' );
+    //register_setting( 'msmvpapi', 'msmvpapi_api_key' );
+    //register_setting( 'msmvpapi', 'msmvpapi_client_id' );
+    //register_setting( 'msmvpapi', 'msmvpapi_client_secret' );
+    register_setting( 'msmvpapi', 'msmvpapi_options' );
     
     // register a new section in the "msmvpapi" page
     add_settings_section(
@@ -60,6 +61,19 @@ function msmvpapi_settings_init ( ) {
             'label_for' => 'msmvpapi_field_client_secret'
         ]
     );  
+
+    // register a new field in the "msmvpapi_section_developers" section, inside the "msmvpapi" page
+    add_settings_field(
+        'msmvpapi_field_token', // as of WP 4.6 this value is used only internally
+        // use $args' label_for to populate the id inside the callback
+        __( 'OAuth Token', 'msmvpapi' ),
+        'msmvpapi_field_token_cb',
+        'msmvpapi',
+        'msmvpapi_section_developers',
+        [
+            'label_for' => 'msmvpapi_field_token'
+        ]
+    );  
 }
  
 /**
@@ -95,14 +109,14 @@ function msmvpapi_section_developers_cb( $args ) {
 // you can add custom key value pairs to be used inside your callbacks.
 function msmvpapi_field_api_key_cb( $args ) {
     // get the value of the setting we've registered with register_setting()
-    $api_key = get_option( 'msmvpapi_api_key' );
+    $api_key = get_option( "msmvpapi_options" ) [ "api_key" ];
     // output the field
 ?>
     <input type="text"
-           name="msmvpapi_api_key"
+           name="msmvpapi_options[api_key]"
            value="<?= isset($api_key) ? esc_attr($api_key) : ''; ?>" />
     <p class="description">
-        <?php esc_html_e( 'The key that comes from ', 'msmvpapi' ); ?><a href="https://apps.dev.microsoft.com/">Microsoft Application Registration Portal</a>
+        <?php esc_html_e( 'The key that comes from ', 'msmvpapi' ); ?><a href="https://mvpapi.portal.azure-api.net/">MVP API Developer Portal</a>
     </p>
 <?php
 }
@@ -116,14 +130,14 @@ function msmvpapi_field_api_key_cb( $args ) {
 // you can add custom key value pairs to be used inside your callbacks.
 function msmvpapi_field_client_secret_cb( $args ) {
     // get the value of the setting we've registered with register_setting()
-    $api_key = get_option( 'msmvpapi_client_secret' );
+    $client_secret = get_option( 'msmvpapi_options' ) [ "client_secret" ];
     // output the field
 ?>
     <input type="text"
-           name="msmvpapi_client_secret"
-           value="<?= isset($api_key) ? esc_attr($api_key) : ''; ?>" />
+           name="msmvpapi_options[client_secret]"
+           value="<?= isset($client_secret) ? esc_attr($client_secret) : ''; ?>" />
     <p class="description">
-        <?php esc_html_e( 'The key that comes from ', 'msmvpapi' ); ?><a href="https://mvpapi.portal.azure-api.net/">MVP API Developer Portal</a>
+        <?php esc_html_e( 'The key that comes from ', 'msmvpapi' ); ?><a href="https://apps.dev.microsoft.com/">Microsoft Application Registration Portal</a>
     </p>
 <?php
 }
@@ -138,14 +152,38 @@ function msmvpapi_field_client_secret_cb( $args ) {
 // you can add custom key value pairs to be used inside your callbacks.
 function msmvpapi_field_client_id_cb( $args ) {
     // get the value of the setting we've registered with register_setting()
-    $api_key = get_option( 'msmvpapi_client_id' );
+    $client_id = get_option( 'msmvpapi_options' ) [ "client_id" ];
     // output the field
 ?>
     <input type="text"
-           name="msmvpapi_client_id"
-           value="<?= isset($api_key) ? esc_attr($api_key) : ''; ?>" />
+           name="msmvpapi_options[client_id]"
+           value="<?= isset($client_id) ? esc_attr($client_id) : ''; ?>" />
     <p class="description">
-        <?php esc_html_e( 'The key that comes from ', 'msmvpapi' ); ?><a href="https://mvpapi.portal.azure-api.net/">MVP API Developer Portal</a>
+        <?php esc_html_e( 'The key that comes from ', 'msmvpapi' ); ?><a href="https://apps.dev.microsoft.com/">Microsoft Application Registration Portal</a>
+    </p>
+<?php
+}
+
+// token field cb
+ 
+// field callbacks can accept an $args parameter, which is an array.
+// $args is defined at the add_settings_field() function.
+// wordpress has magic interaction with the following keys: label_for, class.
+// the "label_for" key value is used for the "for" attribute of the <label>.
+// the "class" key value is used for the "class" attribute of the <tr> containing the field.
+// you can add custom key value pairs to be used inside your callbacks.
+function msmvpapi_field_token_cb( $args ) {
+    // get the value of the setting we've registered with register_setting()
+    $token = get_option( 'msmvpapi_options' ) [ "token" ];
+    // output the field
+?>
+    <input type="text"
+           readonly="readonly"
+           id="msmvpapi_token"
+           name="msmvpapi_options[token]"
+           value="<?= isset($token) ? esc_attr($token) : ''; ?>" />
+    <p class="description">
+        <?php esc_html_e( 'Authenticatoin token ', 'msmvpapi' ); ?>
     </p>
 <?php
 }
@@ -203,7 +241,7 @@ function msmvpapi_options_page_html() {
             // output save settings button
             submit_button( 'Save Settings' );
 ?>
-<a href="#" class="app-login" >Login</a>
+            <a href="#" onclick="javascript:login()">Login</a>
         </form>
     </div>
  <?php
